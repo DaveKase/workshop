@@ -15,7 +15,9 @@
 	
 	<a href='clickCounter'>Kõik klikid</a><br /><a href='index'>Algusesse</a><br /><br />
 	
-	<?php 	
+	<?php
+	// Just a comment
+	
 	$url = 'localhost';
 	$user = 'root';
 	$pass = 'root';
