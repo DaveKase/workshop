@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Workshop</string>
+
+    <string name="blue_text">Sinine</string>
+    <string name="green_text">Roheline</string>
+    <string name="red_text">Punane</string>
+    <string name="yellow_text">Kollane</string>
+
 </resources>
