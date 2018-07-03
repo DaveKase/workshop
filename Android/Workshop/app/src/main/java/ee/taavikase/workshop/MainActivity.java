@@ -49,6 +49,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         new Sender().execute(mButtonId);
-        Toast.makeText(this, btn_color + " nupp sündmus", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, btn_color + " nupp sündmus", Toast.LENGTH_SHORT).show();
     }
 }

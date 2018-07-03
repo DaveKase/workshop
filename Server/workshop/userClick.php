@@ -12,9 +12,11 @@
 	</script>
 	
 	<?php
-	$user_id = filter_input(INPUT_GET, 'user_id', FILTER_SANITIZE_URL);
+	$user_id = filter_input(INPUT_GET, 'user_id', FILTER_SANITIZE_URL);	
 	echo '<h1>Kasutaja <b>' . $user_id . '</b> on klikkinud järgmisi nuppe</h1><br/>';
-	echo '<a href="clickCounter">Kõik klikid</a><br /><a href="index">Algusesse</a><br />';
+	echo '<a href="clickCounter">Kõik klikid</a><br />';
+	echo '<a href="userCount">Kasutajad</a><br />';
+	echo '<a href="index">Algusesse</a><br />';
 	
 	$url = 'localhost';
 	$user = 'root';
