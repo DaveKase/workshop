@@ -1,4 +1,4 @@
-package ee.taavikase.workshop;
+package ee.taavikase.tootuba;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -13,30 +13,53 @@ import java.net.URL;
 
 public class Sender extends AsyncTask<String, Void, String> {
     private static final String SERVER_URL = "http://192.168.1.173:8080/workshop/receiveClick";
-    private String mUserId = "Taavi Kase";
+    private String mUserID ="Taavi";
     private static final String JSON_USER_ID = "user_id";
     private static final String JSON_BTN_NAME = "btn_name";
     private static final String TAG = "Sender";
 
+    @Override
+    protected String doInBackground(String... params) {
+        Log.e(TAG, "doInBackground started");
+        mUserID = checkForWhiteSpace();
+
+        try {
+            String content = createJsonString(params);
+            HttpURLConnection httpurlConnection = createConnection();
+            output(httpurlConnection, content);
+            int httpResult = httpurlConnection.getResponseCode();
+
+            if (httpResult != HttpURLConnection.HTTP_OK) {
+                Log.e(TAG, httpResult + " error " + httpurlConnection.getResponseMessage());
+            }
+
+            httpurlConnection.disconnect();
+            return String.valueOf(httpResult);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
     private String checkForWhiteSpace() {
-        if(mUserId.contains(" ")) {
-            String[] userIDs = mUserId.split(" ");
-            mUserId = "";
+        if (mUserID.contains(" ")) {
+            String[] userIDs = mUserID.split(" ");
+            mUserID = "";
 
             StringBuilder builder = new StringBuilder();
             for (String userID : userIDs) {
                 builder.append(userID);
             }
 
-            mUserId = builder.toString();
+            mUserID = builder.toString();
         }
 
-        return mUserId;
+        return mUserID;
     }
 
     private String createJsonString(String... params) throws JSONException {
         JSONObject jObject = new JSONObject();
-        jObject.put(JSON_USER_ID, mUserId);
+        jObject.put(JSON_USER_ID, mUserID);
         jObject.put(JSON_BTN_NAME, params[0]);
         return jObject.toString();
     }
@@ -53,38 +76,9 @@ public class Sender extends AsyncTask<String, Void, String> {
     }
 
     private void output(HttpURLConnection httpURLConnection, String content) throws IOException {
-        DataOutputStream outStream = new DataOutputStream(httpURLConnection.getOutputStream());
-        outStream.writeBytes(content);
-        outStream.flush();
-        outStream.close();
-    }
-
-    @Override
-    protected String doInBackground(String... params) {
-        Log.e(TAG, "doInBackground started");
-        mUserId = checkForWhiteSpace();
-
-        try {
-            String content = createJsonString(params);
-            HttpURLConnection httpURLConnection = createConnection();
-            output(httpURLConnection, content);
-            int httpResult = httpURLConnection.getResponseCode();
-
-            if (httpResult != HttpURLConnection.HTTP_OK) {
-                Log.e(TAG, httpResult + " Error: " + httpURLConnection.getResponseMessage());
-            }
-
-            httpURLConnection.disconnect();
-            return String.valueOf(httpResult);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-    @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
-        Log.e("TAG", "on post exec result: " + result);
+        DataOutputStream outputStream = new DataOutputStream(httpURLConnection.getOutputStream());
+        outputStream.writeBytes(content);
+        outputStream.flush();
+        outputStream.close();
     }
 }
