@@ -1,4 +1,5 @@
 <?php
+header('Content-type: application/json; charset=UTF-8');
 $url = 'localhost';
 $user = 'root';
 $pass = 'root';
@@ -24,8 +25,10 @@ if ($user_id == '') {
 }
 
 $query = 'SELECT * FROM ' . $table_name  . ' WHERE ' . $col_user_id . ' = "' . $user_id . '" AND ' . $col_btn_name . ' =  "' . $btn_name . '"';
+$mysqli->query('SET NAMES utf8');
 $result = $mysqli->query($query);
 $row_count = mysqli_num_rows($result);
+$clicked = 0;
 
 if($row_count > 0) {
 	while($row = mysqli_fetch_array($result)) {
@@ -36,9 +39,12 @@ if($row_count > 0) {
 		$mysqli->query($query);
 	}
 } else {
+	$clicked = 1;
 	$query = 'INSERT INTO ' . $table_name . ' (' . $col_user_id . ', ' . $col_btn_name . ', ' . $col_clicked . ') VALUES ("' . $user_id . '", "' . $btn_name . '", 1)';
 	$mysqli->query($query);
 }
+
+echo '{"clicked":"' . $clicked . '"}';
 
 $result->free();
 $mysqli->close();

@@ -25,6 +25,7 @@
 	
 	$mysqli = new mysqli($url, $user, $pass, $db);
 	$query = 'SELECT ' . $col_user_id . ' FROM ' . $table_name . ' GROUP BY ' . $col_user_id;
+	$mysqli->query('SET NAMES utf8');
 	$result = $mysqli->query($query);
 	
 	$count = 1;

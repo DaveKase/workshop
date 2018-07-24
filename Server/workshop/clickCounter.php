@@ -31,6 +31,7 @@
 	
 	$mysqli = new mysqli($url, $user, $pass, $db);
 	$query = 'SELECT ' . $col_btn_name . ', SUM( ' . $col_clicked . ') as click  FROM ' . $table_name . ' GROUP BY ' . $col_btn_name;
+	$mysqli->query('SET NAMES utf8');
 	$result = $mysqli->query($query);
 	
 	while ($row = $result->fetch_array()) {

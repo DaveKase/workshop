@@ -30,6 +30,7 @@
 	
 	$mysqli = new mysqli($url, $user, $pass, $db);
 	$query = 'SELECT ' . $col_btn_name . ', ' . $col_clicked . ' FROM ' . $table_name . ' WHERE ' . $col_user_id . ' = ' . '"' . $user_id . '"';
+	$mysqli->query('SET NAMES utf8');
 	$result = $mysqli->query($query);
 	
 	while ($row = $result->fetch_array()) {
