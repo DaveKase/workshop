@@ -12,7 +12,8 @@
 	</script>
 		
 	<h1>Siin on näha kõik nupulevajutused kokku</h1>
-	<a href='userCount'>Kasutajad</a><br /><a href='index'>Algusesse</a><br />
+	<a href='userCount'>Kasutajad</a><br />
+	<a href='index'>Algusesse</a><br />
 	
 	<?php 		
 	$url = 'localhost';

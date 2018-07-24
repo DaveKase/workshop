@@ -13,7 +13,8 @@
 	
 	<h1>Siin on näha kõik kasutajad</h1>
 	
-	<a href='clickCounter'>Kõik klikid</a><br /><a href='index'>Algusesse</a><br /><br />
+	<a href='clickCounter'>Kõik klikid</a><br />
+	<a href='index'>Algusesse</a><br /><br />
 	
 	<?php
 	$url = 'localhost';

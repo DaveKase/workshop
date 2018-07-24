@@ -6,26 +6,32 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Sender extends AsyncTask<String, Void, String> {
+    private static final String TAG = "Sender";
     private static final String SERVER_URL = "http://192.168.1.173:8080/workshop/receiveClick";
-    private String mUserId = "Taavi Kase";
     private static final String JSON_USER_ID = "user_id";
     private static final String JSON_BTN_NAME = "btn_name";
-    private static final String TAG = "Sender";
+    private static final String JSON_CLICKED = "clicked";
+
+    // mUserId ei tohi sisaldada täpitähti, kuna seda kasutatakse ka serveris URLi osana
+    private String mUserId = "Taavi Kase";
 
     private String checkForWhiteSpace() {
-        if(mUserId.contains(" ")) {
+        if (mUserId.contains(" ")) {
             String[] userIDs = mUserId.split(" ");
             mUserId = "";
 
             StringBuilder builder = new StringBuilder();
-            for (String userID : userIDs) {
-                builder.append(userID);
+
+            for (String userId : userIDs) {
+                builder.append(userId);
             }
 
             mUserId = builder.toString();
@@ -35,10 +41,11 @@ public class Sender extends AsyncTask<String, Void, String> {
     }
 
     private String createJsonString(String... params) throws JSONException {
-        JSONObject jObject = new JSONObject();
-        jObject.put(JSON_USER_ID, mUserId);
-        jObject.put(JSON_BTN_NAME, params[0]);
-        return jObject.toString();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(JSON_USER_ID, mUserId);
+        jsonObject.put(JSON_BTN_NAME, params[0]);
+        Log.e(TAG, "JSON = " + jsonObject.toString());
+        return jsonObject.toString();
     }
 
     private HttpURLConnection createConnection() throws IOException {
@@ -55,13 +62,28 @@ public class Sender extends AsyncTask<String, Void, String> {
     private void output(HttpURLConnection httpURLConnection, String content) throws IOException {
         DataOutputStream outStream = new DataOutputStream(httpURLConnection.getOutputStream());
         outStream.writeBytes(content);
+        Log.e(TAG, "content = " + content);
         outStream.flush();
         outStream.close();
     }
 
+    private String getResponseContent(HttpURLConnection httpURLConnection) throws IOException, JSONException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+        String inputLine;
+        StringBuilder response = new StringBuilder();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+
+        in.close();
+        JSONObject jsonObject = new JSONObject(response.toString());
+        return jsonObject.getString(JSON_CLICKED);
+    }
+
     @Override
     protected String doInBackground(String... params) {
-        Log.e(TAG, "doInBackground started");
+        Log.e(TAG, "doInBackground");
         mUserId = checkForWhiteSpace();
 
         try {
@@ -72,19 +94,15 @@ public class Sender extends AsyncTask<String, Void, String> {
 
             if (httpResult != HttpURLConnection.HTTP_OK) {
                 Log.e(TAG, httpResult + " Error: " + httpURLConnection.getResponseMessage());
+                return "";
+            } else {
+                String responseContent = getResponseContent(httpURLConnection);
+                httpURLConnection.disconnect();
+                return responseContent;
             }
-
-            httpURLConnection.disconnect();
-            return String.valueOf(httpResult);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "exception: " + e.getMessage());
             return "";
         }
-    }
-
-    @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
-        Log.e("TAG", "on post exec result: " + result);
     }
 }
