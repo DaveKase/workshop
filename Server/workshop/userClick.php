@@ -34,11 +34,14 @@
 	
 	// Querying the database and using UTF-8 charset
 	$mysqli = new mysqli($url, $user, $pass, $db);
-	$query = 'SELECT ' . $col_btn_name . ', ' . $col_clicked . ' FROM ' . $table_name . ' WHERE ' . $col_user_id . ' = ' . '"' . $user_id . '"';
+	$query = 'SELECT ' . $col_btn_name . ', ' . $col_clicked . ' FROM ' . $table_name 
+		. ' WHERE ' . $col_user_id . ' = ' . '"' . $user_id . '"';
+		
 	$mysqli->query('SET NAMES utf8');
 	$result = $mysqli->query($query);
 	
-	// Creating an SVG image for each different different button. The image is a circle, which's radius is determined by the click count
+	// Creating an SVG image for each different different button
+	// The image is a circle, which's radius is determined by the click count
 	while ($row = $result->fetch_array()) {
 		echo '<svg width="150" height="150">
 				<circle cx="50" cy="50" r="'.$row[$col_clicked].'" fill="'.$row[$col_btn_name].'" />

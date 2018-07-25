@@ -31,7 +31,8 @@ if ($user_id == '') {
 	$user_id = 'default_user';
 }
 
-// Replacing all non-alphabetical characters, because user ID is used in the project as a part of URL and using those characters will make the server behave irradically
+// Replacing all non-alphabetical characters, because user ID is used in the project as a part of URL
+// and using those characters will make the server behave irradically
 $user_id = mb_strtolower($user_id);
 $user_id = str_replace(' ', '', $user_id);
 $user_id = str_replace('ä', '2', $user_id);
@@ -76,25 +77,29 @@ $user_id = str_replace('€', '', $user_id);
 $user_id = str_replace('§', '', $user_id);
 
 // Making a query to server to find out, if user ID exists in db and if the user has already clicked sent button
-$query = 'SELECT * FROM ' . $table_name  . ' WHERE ' . $col_user_id . ' = "' . $user_id . '" AND ' . $col_btn_name . ' =  "' . $btn_name . '"';
+$query = 'SELECT * FROM ' . $table_name  . ' WHERE ' . $col_user_id . ' = "' . $user_id 
+	. '" AND ' . $col_btn_name . ' =  "' . $btn_name . '"';
+	
 $mysqli->query('SET NAMES utf8');
 $result = $mysqli->query($query);
 $row_count = mysqli_num_rows($result);
 $clicked = 0;
 
-// If we have a result, then user exists and there is a previous button click, so we update the click count, else we add a new row to database,
-// so user and button click exists next time
+// If we have a result, then user exists and there is a previous button click, so we update the click count,
+// else we add a new row to database, so user and button click exists next time
 if($row_count > 0) {
 	while($row = mysqli_fetch_array($result)) {
 		$clicked = $row[$col_clicked] + 1;
-		$query = 'UPDATE ' . $table_name . ' SET ' . $col_clicked . ' = ' . $clicked . ' WHERE ' . $col_user_id . ' = "' . $user_id . '" AND ' 
-			. $col_btn_name . ' = "' . $btn_name . '"';
+		$query = 'UPDATE ' . $table_name . ' SET ' . $col_clicked . ' = ' . $clicked . ' WHERE ' 
+			. $col_user_id . ' = "' . $user_id . '" AND ' . $col_btn_name . ' = "' . $btn_name . '"';
 		
 		$mysqli->query($query);
 	}
 } else {
 	$clicked = 1;
-	$query = 'INSERT INTO ' . $table_name . ' (' . $col_user_id . ', ' . $col_btn_name . ', ' . $col_clicked . ') VALUES ("' . $user_id . '", "' . $btn_name . '", 1)';
+	$query = 'INSERT INTO ' . $table_name . ' (' . $col_user_id . ', ' . $col_btn_name . ', ' 
+		. $col_clicked . ') VALUES ("' . $user_id . '", "' . $btn_name . '", 1)';
+		
 	$mysqli->query($query);
 }
 

@@ -31,11 +31,13 @@
 	
 	// Querying the database and using UTF-8 charset
 	$mysqli = new mysqli($url, $user, $pass, $db);
-	$query = 'SELECT ' . $col_btn_name . ', SUM( ' . $col_clicked . ') as click  FROM ' . $table_name . ' GROUP BY ' . $col_btn_name;
+	$query = 'SELECT ' . $col_btn_name . ', SUM( ' . $col_clicked 
+		. ') as click  FROM ' . $table_name . ' GROUP BY ' . $col_btn_name;
 	$mysqli->query('SET NAMES utf8');
 	$result = $mysqli->query($query);
 	
-	// Creating an SVG image for each different different button. The image is a circle, which's radius is determined by the click count
+	// Creating an SVG image for each different different button
+	// The image is a circle, which's radius is determined by the click count
 	while ($row = $result->fetch_array()) {
 		echo '<svg width="150" height="150">
 				<circle cx="50" cy="50" r="'.$row[$sub_click].'" fill="'.$row[$col_btn_name].'" />
