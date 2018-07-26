@@ -7,44 +7,27 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+
 import java.net.URL;
 
 public class Sender extends AsyncTask<String, Void, String> {
     private static final String TAG = "Sender";
     private static final String SERVER_URL = "http://192.168.1.173:8080/workshop/receiveClick";
+    private static final String USER_ID = "Särž Šüöõss";
     private static final String JSON_USER_ID = "user_id";
     private static final String JSON_BTN_NAME = "btn_name";
     private static final String JSON_CLICKED = "clicked";
 
-    // mUserId ei tohi sisaldada täpitähti, kuna seda kasutatakse ka serveris URLi osana
-    private String mUserId = "Taavi Kase";
-
-    private String checkForWhiteSpace() {
-        if (mUserId.contains(" ")) {
-            String[] userIDs = mUserId.split(" ");
-            mUserId = "";
-
-            StringBuilder builder = new StringBuilder();
-
-            for (String userId : userIDs) {
-                builder.append(userId);
-            }
-
-            mUserId = builder.toString();
-        }
-
-        return mUserId;
-    }
-
     private String createJsonString(String... params) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put(JSON_USER_ID, mUserId);
+        jsonObject.put(JSON_USER_ID, USER_ID);
         jsonObject.put(JSON_BTN_NAME, params[0]);
-        Log.e(TAG, "JSON = " + jsonObject.toString());
         return jsonObject.toString();
     }
 
@@ -60,10 +43,11 @@ public class Sender extends AsyncTask<String, Void, String> {
     }
 
     private void output(HttpURLConnection httpURLConnection, String content) throws IOException {
-        DataOutputStream outStream = new DataOutputStream(httpURLConnection.getOutputStream());
-        outStream.writeBytes(content);
         Log.e(TAG, "content = " + content);
-        outStream.flush();
+        DataOutputStream outStream = new DataOutputStream(httpURLConnection.getOutputStream());
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream, "UTF-8"));
+        writer.write(content);
+        writer.close();
         outStream.close();
     }
 
@@ -78,14 +62,13 @@ public class Sender extends AsyncTask<String, Void, String> {
 
         in.close();
         JSONObject jsonObject = new JSONObject(response.toString());
+        Log.e(TAG, "response jsonObject = " + jsonObject.toString());
+
         return jsonObject.getString(JSON_CLICKED);
     }
 
     @Override
     protected String doInBackground(String... params) {
-        Log.e(TAG, "doInBackground");
-        mUserId = checkForWhiteSpace();
-
         try {
             String content = createJsonString(params);
             HttpURLConnection httpURLConnection = createConnection();
@@ -93,16 +76,15 @@ public class Sender extends AsyncTask<String, Void, String> {
             int httpResult = httpURLConnection.getResponseCode();
 
             if (httpResult != HttpURLConnection.HTTP_OK) {
-                Log.e(TAG, httpResult + " Error: " + httpURLConnection.getResponseMessage());
-                return "";
+                return httpResult + " Error: " + httpURLConnection.getResponseMessage();
             } else {
                 String responseContent = getResponseContent(httpURLConnection);
                 httpURLConnection.disconnect();
                 return responseContent;
             }
         } catch (Exception e) {
-            Log.e(TAG, "exception: " + e.getMessage());
-            return "";
+            e.printStackTrace();
+            return "exception: " + e.getMessage();
         }
     }
 }

@@ -18,7 +18,7 @@
 	echo '<h1>Kasutaja <u>' . $user_id . '</u> on klikkinud järgmisi nuppe</h1><br/>';
 	echo '<a href="clickCounter">Nupule vajutused</a><br />';
 	echo '<a href="userCount">Kasutajad</a><br />';
-	echo '<a href="index">Algusesse</a><br />';
+	echo '<a href="index">Algusesse</a><br /><br />';
 	
 	// Database connection variables
 	$url = 'localhost';

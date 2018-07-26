@@ -39,10 +39,14 @@
 	
 	// Counting distinct users from database
 	// For each different user, create a link that ends with user ID variable
-	while ( $row = $result->fetch_array() ) {
-		echo $count . '. <a href = userClick?user_id=' . $row[$col_user_id] . '>' . $row[$col_user_id] . '</a>';
-		echo "<br />";
-		$count++;
+	if ($result->num_rows > 0) {
+		while ( $row = $result->fetch_array() ) {
+			echo $count . '. <a href = userClick?user_id=' . $row[$col_user_id] . '>' . $row[$col_user_id] . '</a>';
+			echo "<br />";
+			$count++;
+		}
+	} else {
+		echo '<i>Kuvamiseks kirjeid ei ole</i>';
 	}
 	
 	// Freeing some resources

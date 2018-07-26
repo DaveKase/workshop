@@ -1,7 +1,4 @@
 <?php
-// header used to set content type and charset
-header('Content-type: application/json; charset=UTF-8');
-
 // Database connection variables
 $url = 'localhost';
 $user = 'root';
@@ -10,17 +7,17 @@ $db = 'workshop';
 $table_name = 'counter';
 
 // Column names
+$col_user_id = 'user_id';
 $col_btn_name = 'btn_name';
 $col_clicked = 'clicked';
-$col_user_id = 'user_id';
 
 // Creating a connection
 $mysqli = new mysqli($url, $user, $pass, $db);
 
 // Getting the JSON object sent from device
 $value = json_decode(file_get_contents('php://input'), true);
-$btn_name = $value[$col_btn_name];
 $user_id = $value[$col_user_id];
+$btn_name = $value[$col_btn_name];
 
 // If there is no button name or user id, default values are used
 if($btn_name == '') {
@@ -46,7 +43,6 @@ $user_id = str_replace('.', '', $user_id);
 $user_id = str_replace(';', '', $user_id);
 $user_id = str_replace(':', '', $user_id);
 $user_id = str_replace('-', '', $user_id);
-$user_id = str_replace('_', '', $user_id);
 $user_id = str_replace('!', '', $user_id);
 $user_id = str_replace('"', '', $user_id);
 $user_id = str_replace('@', '', $user_id);

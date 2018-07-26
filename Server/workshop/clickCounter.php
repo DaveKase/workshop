@@ -14,7 +14,7 @@
 		
 	<h1>Siin on näha kõik nupulevajutused kokku</h1>
 	<a href='userCount'>Kasutajad</a><br />
-	<a href='index'>Algusesse</a><br />
+	<a href='index'>Algusesse</a><br /><br />
 	
 	<?php
 	// Database connection variables
@@ -38,13 +38,17 @@
 	
 	// Creating an SVG image for each different different button
 	// The image is a circle, which's radius is determined by the click count
-	while ($row = $result->fetch_array()) {
-		echo '<svg width="150" height="150">
-				<circle cx="50" cy="50" r="'.$row[$sub_click].'" fill="'.$row[$col_btn_name].'" />
-				<text fill="black" font-size="12" font-family="Verdana" x="41" y="55">'.$row[$sub_click].'</text>
-				Sorry, your browser does not support inline SVG.
-				</svg>
-				<br />';
+	if ($result->num_rows > 0) {
+		while ($row = $result->fetch_array()) {
+			echo '<svg width="150" height="150">
+					<circle cx="50" cy="50" r="'.$row[$sub_click].'" fill="'.$row[$col_btn_name].'" />
+					<text fill="black" font-size="12" font-family="Verdana" x="41" y="55">'.$row[$sub_click].'</text>
+					Sorry, your browser does not support inline SVG.
+					</svg>
+					<br />';
+		}
+	} else {
+		echo '<i>Kuvamiseks kirjeid ei ole</i>';
 	}
 	
 	// Freeing some resources
