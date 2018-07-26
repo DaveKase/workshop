@@ -31,7 +31,7 @@ if ($user_id == '') {
 // Replacing all non-alphabetical characters, because user ID is used in the project as a part of URL
 // and using those characters will make the server behave irradically
 $user_id = mb_strtolower($user_id);
-$user_id = str_replace(' ', '', $user_id);
+$user_id = str_replace(' ', '_', $user_id);
 $user_id = str_replace('ä', '2', $user_id);
 $user_id = str_replace('õ', '6', $user_id);
 $user_id = str_replace('ü', 'y', $user_id);
@@ -49,7 +49,7 @@ $user_id = str_replace('@', '', $user_id);
 $user_id = str_replace('#', '', $user_id);
 $user_id = str_replace('£', '', $user_id);
 $user_id = str_replace('¤', '', $user_id);
-$user_id = str_replace('$', '', $user_id);
+$user_id = str_replace('$', 's', $user_id);
 $user_id = str_replace('%', '', $user_id);
 $user_id = str_replace('&', '', $user_id);
 $user_id = str_replace('/', '', $user_id);
@@ -69,8 +69,20 @@ $user_id = str_replace('ˇ', '', $user_id);
 $user_id = str_replace('~', '', $user_id);
 $user_id = str_replace('*', '', $user_id);
 $user_id = str_replace('\'', '', $user_id);
-$user_id = str_replace('€', '', $user_id);
+$user_id = str_replace('€', 'e', $user_id);
 $user_id = str_replace('§', '', $user_id);
+$user_id = str_replace('é', 'e', $user_id);
+$user_id = str_replace('è', 'e', $user_id);
+$user_id = str_replace('ù', 'u', $user_id);
+$user_id = str_replace('ó', 'o', $user_id);
+$user_id = str_replace('ò', 'o', $user_id);
+$user_id = str_replace('à', 'a', $user_id);
+$user_id = str_replace('ś', 's', $user_id);
+$user_id = str_replace('ź', 'z', $user_id);
+$user_id = str_replace('ń', 'n', $user_id);
+$user_id = str_replace('^', '', $user_id);
+$user_id = str_replace('½', '0.5', $user_id);
+$user_id = str_replace('|', '', $user_id);
 
 // Making a query to server to find out, if user ID exists in db and if the user has already clicked sent button
 $query = 'SELECT * FROM ' . $table_name  . ' WHERE ' . $col_user_id . ' = "' . $user_id 
