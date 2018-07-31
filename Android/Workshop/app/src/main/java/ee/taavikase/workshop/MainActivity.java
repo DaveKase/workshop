@@ -54,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
             sender.execute(btnClr);
             String clickCount = sender.get();
 
-            Toast.makeText(this, btnClrStr + " " + clickCount +  ". nupule vajutus, ",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, btnClrStr + " " + clickCount +  ". nupule vajutus", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }

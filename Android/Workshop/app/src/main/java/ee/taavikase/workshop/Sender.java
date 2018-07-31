@@ -19,8 +19,7 @@ import java.net.URL;
 public class Sender extends AsyncTask<String, Void, String> {
     private static final String TAG = "Sender";
     private static final String SERVER_URL = "http://192.168.1.173:8080/workshop/receiveClick";
-    // Sending this user id to server, it tuns into 2r6_kyroktersszsz_seeeeeuuooooaasszznn0.5e and works properly
-    private static final String USER_ID = "äRõ KürökteršŠž.,;@£#$¤%&:-=[]()}{'*§+?\\\\Ž s#´`ˇ~*/€§éÉÈèÙùÒÓóòÀàŚśŹźŃń½|e";
+    private static final String USER_ID = "Taavi Kase";
     private static final String JSON_USER_ID = "user_id";
     private static final String JSON_BTN_NAME = "btn_name";
     private static final String JSON_CLICKED = "clicked";
@@ -76,12 +75,12 @@ public class Sender extends AsyncTask<String, Void, String> {
             output(httpURLConnection, content);
             int httpResult = httpURLConnection.getResponseCode();
 
-            if (httpResult != HttpURLConnection.HTTP_OK) {
-                return httpResult + " Error: " + httpURLConnection.getResponseMessage();
-            } else {
+            if (httpResult == HttpURLConnection.HTTP_OK) {
                 String responseContent = getResponseContent(httpURLConnection);
                 httpURLConnection.disconnect();
                 return responseContent;
+            } else {
+                return httpResult + " Error: " + httpURLConnection.getResponseMessage();
             }
         } catch (Exception e) {
             e.printStackTrace();
