@@ -1,12 +1,13 @@
 package ee.taavikase.workshop;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private static final String COL_BLUE = "blue";
     private static final String COL_GREEN = "green";
     private static final String COL_RED = "red";
@@ -55,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
             String clickCount = sender.get();
 
             Toast.makeText(this, btnClrStr + " " + clickCount +  ". nupule vajutus", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(this, SecondActivity.class);
+            startActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();
         }
