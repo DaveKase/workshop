@@ -46,6 +46,9 @@
 	// Freeing some resources
 	$result->free();
 	$mysqli->close();
+	
+	$server_url=$_SERVER['REQUEST_URI'];
+	header("Refresh:5;URL=$server_url");
 	?>
 	</body>
 </html>
