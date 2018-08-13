@@ -18,8 +18,8 @@ import java.net.URL;
 
 public class Sender extends AsyncTask<String, Void, String> {
     private static final String TAG = "Sender";
-    private static final String SERVER_URL = "http://192.168.1.105:8080/workshop/receiveClick";
-    private static final String USER_ID = "Taavi Kase";
+    private static final String SERVER_URL = "";
+    private static final String USER_ID = "Taavi Kodu Arvuti";
     private static final String JSON_USER_ID = "user_id";
     private static final String JSON_BTN_NAME = "btn_name";
     private static final String JSON_CLICKED = "clicked";
@@ -28,7 +28,9 @@ public class Sender extends AsyncTask<String, Void, String> {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(JSON_USER_ID, USER_ID);
         jsonObject.put(JSON_BTN_NAME, params[0]);
-        return jsonObject.toString();
+        String json = jsonObject.toString();
+        Log.e(TAG, "json, = " + json);
+        return json;
     }
 
     private HttpURLConnection createConnection() throws IOException {

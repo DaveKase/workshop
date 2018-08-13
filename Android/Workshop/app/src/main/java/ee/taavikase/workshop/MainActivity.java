@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
             sender.execute(btnClr);
             String clickCount = sender.get();
 
-            Toast.makeText(this, btnClrStr + " " + clickCount +  ". nupule vajutus", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, btnClrStr + " " + clickCount +  ". nupule vajutus", Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(this, SecondActivity.class);
             startActivity(intent);
