@@ -19,7 +19,7 @@ import java.net.URL;
 public class Sender extends AsyncTask<String, Void, String> {
     private static final String TAG = "Sender";
     private static final String SERVER_URL = "";
-    private static final String USER_ID = "Taavi Kodu Arvuti";
+    private static final String USER_ID = "Taavi";
     private static final String JSON_USER_ID = "user_id";
     private static final String JSON_BTN_NAME = "btn_name";
     private static final String JSON_CLICKED = "clicked";
