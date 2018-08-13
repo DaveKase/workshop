@@ -5,13 +5,6 @@
 	</head>
 	<body>
 	
-	<!-- This section does automatic reload after 5 seconds -->
-	<script type="text/javascript">
-		setTimeout(function() {
-			window.location.reload();
-		}, 5000);
-	</script>
-	
 	<h1>Siin on näha kõik kasutajad</h1>
 	
 	<a href='clickCounter'>Nupule vajutused</a><br />
@@ -19,7 +12,7 @@
 	
 	<?php
 	// Database connection variables
-	$url = 'localhost';
+	$url = '127.0.0.1';
 	$user = 'root';
 	$pass = 'root';
 	$db = 'workshop';

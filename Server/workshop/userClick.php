@@ -5,13 +5,6 @@
 	</head>
 	<body>
 	
-	<!-- This section does automatic reload after 5 seconds -->
-	<script type="text/javascript">
-		setTimeout(function() {
-			window.location.reload();
-		}, 5000);
-	</script>
-	
 	<?php
 	// First we get the user ID from URL
 	$user_id = filter_input(INPUT_GET, 'user_id', FILTER_SANITIZE_URL);
@@ -21,7 +14,7 @@
 	echo '<a href="index">Algusesse</a><br /><br />';
 	
 	// Database connection variables
-	$url = 'localhost';
+	$url = '127.0.0.1';
 	$user = 'root';
 	$pass = 'root';
 	$db = 'workshop';

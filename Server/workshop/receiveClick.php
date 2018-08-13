@@ -1,6 +1,6 @@
 <?php
 // Database connection variables
-$url = 'localhost';
+$url = '127.0.0.1';
 $user = 'root';
 $pass = 'root';
 $db = 'workshop';

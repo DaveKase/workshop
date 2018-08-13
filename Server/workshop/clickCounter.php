@@ -4,21 +4,13 @@
 		<title>Workshop</title>
 	</head>
 	<body>
-	
-	<!-- This section does automatic reload after 5 seconds -->
-	<script type="text/javascript">
-		setTimeout(function() {
-			window.location.reload();
-		}, 5000);
-	</script>
-		
 	<h1>Siin on näha kõik nupulevajutused kokku</h1>
 	<a href='userCount'>Kasutajad</a><br />
 	<a href='index'>Algusesse</a><br /><br />
 	
 	<?php
 	// Database connection variables
-	$url = 'localhost';
+	$url = '127.0.0.1';
 	$user = 'root';
 	$pass = 'root';
 	$db = 'workshop';
