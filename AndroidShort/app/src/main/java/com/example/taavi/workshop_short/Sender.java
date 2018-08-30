@@ -1,4 +1,4 @@
-package ee.taavikase.workshop;
+package com.example.taavi.workshop_short;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -18,23 +18,18 @@ import java.net.URL;
 
 public class Sender extends AsyncTask<String, Void, String> {
     private static final String TAG = "Sender";
-    private static final String SERVER_URL = "http://192.168.211.9:8080/workshop/receiveClick";
-    private static final String USER_ID = "Dave Kase";
-    private static final String JSON_USER_ID = "user_id";
-    private static final String JSON_BTN_NAME = "btn_name";
-    private static final String JSON_CLICKED = "clicked";
 
     private String createJsonString(String... params) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put(JSON_USER_ID, USER_ID);
-        jsonObject.put(JSON_BTN_NAME, params[0]);
+        jsonObject.put("user_id", "Taavi lyhike");
+        jsonObject.put("btn_name", params[0]);
         String json = jsonObject.toString();
         Log.e(TAG, "json, = " + json);
         return json;
     }
 
     private HttpURLConnection createConnection() throws IOException {
-        URL url = new URL(SERVER_URL);
+        URL url = new URL("");
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         httpURLConnection.setDoInput(true);
         httpURLConnection.setDoOutput(true);
@@ -66,7 +61,7 @@ public class Sender extends AsyncTask<String, Void, String> {
         JSONObject jsonObject = new JSONObject(response.toString());
         Log.e(TAG, "response jsonObject = " + jsonObject.toString());
 
-        return jsonObject.getString(JSON_CLICKED);
+        return jsonObject.getString("clicked");
     }
 
     @Override
