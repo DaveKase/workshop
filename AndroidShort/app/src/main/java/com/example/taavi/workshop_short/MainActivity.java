@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
             Sender sender = new Sender();
             sender.execute(btnClr);
             String clickCount = sender.get();
-            Toast.makeText(this, btnClrStr + clickCount + ". nupule vajutus", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, btnClrStr + " " + clickCount + ". nupule vajutus", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }

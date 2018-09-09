@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f47a7a43-ad5a-45d9-8d85-4bdecddcb961" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../AndroidShort/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/../AndroidShort/.idea/caches/build_file_checksums.ser" />
-      <change beforePath="$PROJECT_DIR$/../AndroidShort/app/src/main/java/com/example/taavi/workshop_short/Sender.java" afterPath="$PROJECT_DIR$/../AndroidShort/app/src/main/java/com/example/taavi/workshop_short/Sender.java" />
+      <change beforePath="$PROJECT_DIR$/Workshop/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/Workshop/.idea/caches/build_file_checksums.ser" />
+      <change beforePath="$PROJECT_DIR$/Workshop/app/src/main/java/ee/taavikase/workshop/Sender.java" afterPath="$PROJECT_DIR$/Workshop/app/src/main/java/ee/taavikase/workshop/Sender.java" />
+      <change beforePath="$PROJECT_DIR$/../AndroidShort/.idea/misc.xml" afterPath="$PROJECT_DIR$/../AndroidShort/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/../WorkshopShortTest/.idea/misc.xml" afterPath="$PROJECT_DIR$/../WorkshopShortTest/.idea/misc.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,17 +44,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="D:/Progs/AVD" />
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../AndroidShort" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
