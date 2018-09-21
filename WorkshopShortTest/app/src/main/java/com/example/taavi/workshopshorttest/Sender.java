@@ -21,13 +21,13 @@ public class Sender extends AsyncTask<String, Void, String> {
 
     private String createJsonString(String... params) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("user_id", "Taavi");
+        jsonObject.put("user_id", "MSI_22");
         jsonObject.put("btn_name", params[0]);
         return jsonObject.toString();
     }
 
     private HttpURLConnection createConnection() throws IOException {
-        URL url = new URL("");
+        URL url = new URL("http://192.168.211.48:8080/Workshop/receiveClick");
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         httpURLConnection.setDoInput(true);
         httpURLConnection.setDoOutput(true);

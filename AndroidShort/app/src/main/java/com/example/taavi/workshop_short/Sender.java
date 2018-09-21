@@ -21,7 +21,7 @@ public class Sender extends AsyncTask<String, Void, String> {
 
     private String createJsonString(String... params) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("user_id", "Taavi lyhike");
+        jsonObject.put("user_id", "Taavi Kase");
         jsonObject.put("btn_name", params[0]);
         String json = jsonObject.toString();
         Log.e(TAG, "json, = " + json);
@@ -29,7 +29,7 @@ public class Sender extends AsyncTask<String, Void, String> {
     }
 
     private HttpURLConnection createConnection() throws IOException {
-        URL url = new URL("http://192.168.1.105:8080/workshop/receiveClick");
+        URL url = new URL("http://192.168.211.38:8080/workshop/receiveClick");
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         httpURLConnection.setDoInput(true);
         httpURLConnection.setDoOutput(true);
