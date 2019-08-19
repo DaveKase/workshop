@@ -4,9 +4,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-<<<<<<< HEAD
     <color name="blue">#0000ff</color>
-=======
-    <color name="blue">#00f</color>
->>>>>>> parent of 942d319... Changed short Android project to fit time
 </resources>

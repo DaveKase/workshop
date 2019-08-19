@@ -1,4 +1,4 @@
-package com.example.taavi.workshop_short;
+package com.example.taavi.workshopshorttest;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -21,23 +21,13 @@ public class Sender extends AsyncTask<String, Void, String> {
 
     private String createJsonString(String... params) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-<<<<<<< HEAD
-        jsonObject.put("user_id", "Taavi lyhike");
-=======
-        jsonObject.put("user_id", "Taavi Kase");
->>>>>>> parent of 942d319... Changed short Android project to fit time
+        jsonObject.put("user_id", "MSI_22");
         jsonObject.put("btn_name", params[0]);
-        String json = jsonObject.toString();
-        Log.e(TAG, "json, = " + json);
-        return json;
+        return jsonObject.toString();
     }
 
     private HttpURLConnection createConnection() throws IOException {
-<<<<<<< HEAD
-        URL url = new URL("http://192.168.211.14:8080/workshop/receiveClick");
-=======
-        URL url = new URL("http://192.168.211.38:8080/workshop/receiveClick");
->>>>>>> parent of 942d319... Changed short Android project to fit time
+        URL url = new URL("http://192.168.211.48:8080/Workshop/receiveClick");
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         httpURLConnection.setDoInput(true);
         httpURLConnection.setDoOutput(true);
@@ -48,24 +38,23 @@ public class Sender extends AsyncTask<String, Void, String> {
     }
 
     private void output(HttpURLConnection httpURLConnection, String content) throws IOException {
-        Log.e(TAG, "content = " + content);
-        DataOutputStream outStream = new DataOutputStream(httpURLConnection.getOutputStream());
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream, "UTF-8"));
+        DataOutputStream outputStream = new DataOutputStream(httpURLConnection.getOutputStream());
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
         writer.write(content);
         writer.close();
-        outStream.close();
+        outputStream.close();
     }
 
     private String getResponseContent(HttpURLConnection httpURLConnection) throws IOException, JSONException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
         String inputLine;
         StringBuilder response = new StringBuilder();
 
-        while ((inputLine = in.readLine()) != null) {
+        while ((inputLine = bufferedReader.readLine()) != null) {
             response.append(inputLine);
         }
 
-        in.close();
+        bufferedReader.close();
         JSONObject jsonObject = new JSONObject(response.toString());
         Log.e(TAG, "response jsonObject = " + jsonObject.toString());
 
@@ -76,13 +65,16 @@ public class Sender extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         try {
             String content = createJsonString(params);
+            Log.e(TAG, "json = " + content);
             HttpURLConnection httpURLConnection = createConnection();
             output(httpURLConnection, content);
             int httpResult = httpURLConnection.getResponseCode();
 
-            if (httpResult == HttpURLConnection.HTTP_OK) {
+            if(httpResult == HttpURLConnection.HTTP_OK) {
                 String responseContent = getResponseContent(httpURLConnection);
                 httpURLConnection.disconnect();
+                Log.e(TAG, "content = " + responseContent);
+
                 return responseContent;
             } else {
                 return httpResult + " Error: " + httpURLConnection.getResponseMessage();

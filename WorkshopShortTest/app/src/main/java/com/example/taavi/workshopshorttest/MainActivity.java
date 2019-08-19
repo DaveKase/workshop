@@ -1,4 +1,4 @@
-package com.example.taavi.workshop_short;
+package com.example.taavi.workshopshorttest;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -23,11 +23,7 @@ public class MainActivity extends Activity {
             Sender sender = new Sender();
             sender.execute(btnClr);
             String clickCount = sender.get();
-<<<<<<< HEAD
-            Toast.makeText(this, btnClrStr + clickCount + ". nupule vajutus", Toast.LENGTH_SHORT).show();
-=======
             Toast.makeText(this, btnClrStr + " " + clickCount + ". nupule vajutus", Toast.LENGTH_SHORT).show();
->>>>>>> parent of 942d319... Changed short Android project to fit time
         } catch (Exception e) {
             e.printStackTrace();
         }
