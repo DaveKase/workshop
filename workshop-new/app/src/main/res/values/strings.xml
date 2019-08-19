@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">WorkshopNew</string>
+    <string name="main_text">Click the button</string>
+    <string name="main_button">Click Me!</string>
+
+    <string name="edit_text">Insert text into text field</string>
+    <string name="field_hint">Insert text here</string>
+    <string name="btn">View</string>
+</resources>

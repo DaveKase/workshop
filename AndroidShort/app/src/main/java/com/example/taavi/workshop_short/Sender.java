@@ -29,7 +29,7 @@ public class Sender extends AsyncTask<String, Void, String> {
     }
 
     private HttpURLConnection createConnection() throws IOException {
-        URL url = new URL("");
+        URL url = new URL("http://192.168.211.14:8080/workshop/receiveClick");
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         httpURLConnection.setDoInput(true);
         httpURLConnection.setDoOutput(true);
