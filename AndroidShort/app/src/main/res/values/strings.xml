@@ -1,8 +1,6 @@
 <resources>
-<<<<<<< HEAD
     <string name="app_name">Workshop</string>
-=======
     <string name="app_name">Lühike töötuba</string>
->>>>>>> parent of 942d319... Changed short Android project to fit time
     <string name="blue_text">Sinine</string>
+    <string name="app_name">Short workshop</string>
 </resources>

@@ -18,8 +18,8 @@ import java.net.URL;
 
 public class Sender extends AsyncTask<String, Void, String> {
     private static final String TAG = "Sender";
-    private static final String SERVER_URL = "http://192.168.211.9:8080/workshop/receiveClick";
-    private static final String USER_ID = "Dave Kase";
+    private static final String SERVER_URL = "http://192.168.1.105:8080/Workshop/receiveClick";
+    private static final String USER_ID = "Taavi";
     private static final String JSON_USER_ID = "user_id";
     private static final String JSON_BTN_NAME = "btn_name";
     private static final String JSON_CLICKED = "clicked";
@@ -28,9 +28,7 @@ public class Sender extends AsyncTask<String, Void, String> {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(JSON_USER_ID, USER_ID);
         jsonObject.put(JSON_BTN_NAME, params[0]);
-        String json = jsonObject.toString();
-        Log.e(TAG, "json, = " + json);
-        return json;
+        return jsonObject.toString();
     }
 
     private HttpURLConnection createConnection() throws IOException {
@@ -45,7 +43,6 @@ public class Sender extends AsyncTask<String, Void, String> {
     }
 
     private void output(HttpURLConnection httpURLConnection, String content) throws IOException {
-        Log.e(TAG, "content = " + content);
         DataOutputStream outStream = new DataOutputStream(httpURLConnection.getOutputStream());
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outStream, "UTF-8"));
         writer.write(content);
@@ -54,17 +51,16 @@ public class Sender extends AsyncTask<String, Void, String> {
     }
 
     private String getResponseContent(HttpURLConnection httpURLConnection) throws IOException, JSONException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
         String inputLine;
         StringBuilder response = new StringBuilder();
 
-        while ((inputLine = in.readLine()) != null) {
+        while ((inputLine = bufferedReader.readLine()) != null) {
             response.append(inputLine);
         }
 
-        in.close();
+        bufferedReader.close();
         JSONObject jsonObject = new JSONObject(response.toString());
-        Log.e(TAG, "response jsonObject = " + jsonObject.toString());
 
         return jsonObject.getString(JSON_CLICKED);
     }
@@ -73,13 +69,16 @@ public class Sender extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         try {
             String content = createJsonString(params);
+            Log.e(TAG, "json, = " + content);
             HttpURLConnection httpURLConnection = createConnection();
             output(httpURLConnection, content);
             int httpResult = httpURLConnection.getResponseCode();
 
             if (httpResult == HttpURLConnection.HTTP_OK) {
                 String responseContent = getResponseContent(httpURLConnection);
+                Log.e(TAG, "response jsonObject = " + responseContent);
                 httpURLConnection.disconnect();
+
                 return responseContent;
             } else {
                 return httpResult + " Error: " + httpURLConnection.getResponseMessage();
