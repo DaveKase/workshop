@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,9 +14,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void onClick(View v) {
+    public void onMainButtonClick(View v) {
         Toast.makeText(this, "Button clicked", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, EditTextActivity.class);
+        Intent intent = new Intent(this, TextViewerActivity.class);
         startActivity(intent);
     }
 }

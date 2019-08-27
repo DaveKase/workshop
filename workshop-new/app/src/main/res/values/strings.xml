@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">WorkshopNew</string>
-    <string name="main_text">Click the button</string>
-    <string name="main_button">Click Me!</string>
+    <string name="app_name">Workshop v2</string>
 
-    <string name="edit_text">Insert text into text field</string>
-    <string name="field_hint">Insert text here</string>
-    <string name="btn">View</string>
+    <string name="main_text">Click the button</string>
+    <string name="main_button_text">Click Me!</string>
+
+    <string name="viewer_text">Insert text into text field</string>
+    <string name="viewer_edit_hint">Insert text here</string>
+    <string name="viewer_button_text">View</string>
 </resources>
